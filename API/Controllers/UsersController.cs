@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using API.Data;
 using API.Entitites;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -18,12 +19,12 @@ namespace API.Controllers
             _context = context;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<AppUser>> GetUsers()
-            => _context.Users.ToList();
+        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+            => await _context.Users.ToListAsync();
         // api/users/3 - get users under 3 id
         [HttpGet("{id}")]
-        public ActionResult<AppUser> GetUser(int id)
-            => _context.Users.Find(id);
+        public async Task<ActionResult<AppUser>> GetUser(int id)
+            => await _context.Users.FindAsync(id);
         
     }
 }
