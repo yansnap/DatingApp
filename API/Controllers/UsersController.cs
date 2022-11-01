@@ -21,7 +21,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
             => await _context.Users.ToListAsync();
-        // api/users/3 - get users under 3 id
+        // api/users/3 - get user under 3 id
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
             => await _context.Users.FindAsync(id);
