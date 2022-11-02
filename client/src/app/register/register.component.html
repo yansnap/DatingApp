@@ -11,6 +11,19 @@
     />
   </div>
   <div class="form-group">
+    <label
+      >Who is your favourite user?
+      <select class="form-control">
+        <option
+          *ngFor="let user of usersFromHomeComponent"
+          [value]="user.userName"
+        >
+          {{ user.userName }}
+        </option>
+      </select>
+    </label>
+  </div>
+  <div class="form-group">
     <input
       type="password"
       class="form-control"
@@ -21,6 +34,8 @@
   </div>
   <div class="form-group text-center">
     <button class="btn btn-success mr-2" type="submit">Register</button>
-    <button class="btn btn-default mr-2" (click)="cancel()" type="button">Cancel</button>
+    <button class="btn btn-default mr-2" (click)="cancel()" type="button">
+      Cancel
+    </button>
   </div>
 </form>
