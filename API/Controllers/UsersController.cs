@@ -17,7 +17,7 @@ namespace API.Controllers
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
-                => Ok(await _userRepository.GetUsersAsync());
+            => Ok(await _userRepository.GetUsersAsync());
         // api/users/3 - get user under 3 id
         [HttpGet("{username}")]
         public async Task<ActionResult<AppUser>> GetUser(string username)
