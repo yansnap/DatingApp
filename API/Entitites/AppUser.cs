@@ -11,7 +11,7 @@ namespace API.Entitites
         public byte[] PasswordSalt { get; set; }
 
         public DateTime DateOfBirth { get; set; }
-        public string KnowsAs { get; set; }
+        public string KnownAs { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
 
         public DateTime LastActive { get; set; } = DateTime.Now;
