@@ -1,14 +1,53 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
   <h2 class="text-center text-primary">Sign up</h2>
   <hr />
-  <app-text-input [formControl]='registerForm.controls["username"]' 
-      [label]='"username"'>
+
+  <div class="form-group">
+    <label style="margin-right: 10px;" class="control-label">I am a:</label>
+    <label class="radio-inline">
+      <input type="radio" value="male" formControlName="gender"> Male
+    </label>
+    <label class="radio-inline">
+      <input type="radio" value="female" formControlName="gender" class="ml-3"> Female
+    </label>
+  </div>
+
+  <app-text-input
+    [formControl]="registerForm.controls['username']"
+    [label]="'username'"
+  >
   </app-text-input>
-  <app-text-input [formControl]='registerForm.controls["password"]' 
-      [label]='"password"' [type]='"password"'>
+  <app-text-input
+    [formControl]="registerForm.controls['knownAs']"
+    [label]="'Known As'"
+  >
   </app-text-input>
-  <app-text-input [formControl]='registerForm.controls["confirmPassword"]'
-      [label]='"Confirm password"' [type]='"password"'>
+  <app-text-input
+    [formControl]="registerForm.controls['dateOfBirth']"
+    [label]="'Date of Birth'"
+  >
+  </app-text-input>
+  <app-text-input
+    [formControl]="registerForm.controls['city']"
+    [label]="'City'"
+  >
+  </app-text-input>
+  <app-text-input
+    [formControl]="registerForm.controls['country']"
+    [label]="'Country'"
+  >
+  </app-text-input>
+  <app-text-input
+    [formControl]="registerForm.controls['password']"
+    [label]="'password'"
+    [type]="'password'"
+  >
+  </app-text-input>
+  <app-text-input
+    [formControl]="registerForm.controls['confirmPassword']"
+    [label]="'Confirm password'"
+    [type]="'password'"
+  >
   </app-text-input>
   <div class="form-group text-center">
     <button class="btn btn-success mr-2" type="submit">Register</button>
