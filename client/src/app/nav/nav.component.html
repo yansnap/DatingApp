@@ -21,20 +21,25 @@
             >Messages</a
           >
         </li>
-        </ng-container>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/errors" routerLinkActive="active"
-            >Errors</a
-          >
-        </li>
+      </ng-container>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/errors" routerLinkActive="active"
+          >Errors</a
+        >
+      </li>
     </ul>
 
-    <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+    <div
+      class="dropdown"
+      *ngIf="accountService.currentUser$ | async as user"
+      dropdown
+    >
+      <img src="{{ user.photoUrl }}" alt="{{ user.username }}" />
       <a
-        class="dropdown-toggle text-light"
+        class="dropdown-toggle text-light ml-2"
         style="text-decoration: none"
         dropdownToggle
-        >Welcome {{user.username | titlecase}}</a
+        >Welcome {{ user.username | titlecase }}</a
       >
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a routerLink="/member/edit" class="dropdown-item">Edit Profile</a>
@@ -64,9 +69,7 @@
         type="password"
         placeholder="Password"
       />
-      <button class="btn btn-success my-2 my-sm-0" type="submit">
-        Login
-      </button>
+      <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
     </form>
   </div>
 </nav>
