@@ -48,14 +48,14 @@ namespace API.Controllers
         }
 
         [HttpPost("add-photo")]
-        public async Task<ActionResult<PhotoDto>> AddPhoto(IFormFile file)
+        public async Task<ActionResult<PhotoDto>> AddPhoto([FromForm]IFormFile file)
         {
             var user = await _userRepository.GetUserByUsernameAsync(User.GetUsername());
 
             var result = await _photoService.AddPhotoAsync(file);
 
-            if (result.Error != null) return BadRequest(result.Error.Message); 
-        
+            if (result.Error != null) return BadRequest(result.Error.Message);
+
             var photo = new Photo
             {
                 Url = result.SecureUrl.AbsoluteUri,
@@ -69,10 +69,13 @@ namespace API.Controllers
 
             user.Photos.Add(photo);
 
-            if (await _userRepository.SaveAllAsync()) 
+            if (await _userRepository.SaveAllAsync())
+            {
                 return _mapper.Map<PhotoDto>(photo);
+            }
+                
 
-            return BadRequest("Problem adding photo")
+            return BadRequest("Problem addding photo");
         }
 
     }

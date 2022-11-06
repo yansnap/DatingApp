@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace API.Services
 {
-    public class PhotoService : IPhotoService
+public class PhotoService : IPhotoService
     {
         private readonly Cloudinary _cloudinary;
         public PhotoService(IOptions<CloudinarySettings> config)
@@ -33,16 +33,18 @@ namespace API.Services
                     File = new FileDescription(file.FileName, stream),
                     Transformation = new Transformation().Height(500).Width(500).Crop("fill").Gravity("face")
                 };
-
                 uploadResult = await _cloudinary.UploadAsync(uploadParams);
             }
+
             return uploadResult;
         }
 
-        public async Task<DeletionResult> DeletePhotoAsnc(string publicId)
+        public async Task<DeletionResult> DeletePhotoAsync(string publicId)
         {
             var deleteParams = new DeletionParams(publicId);
+
             var result = await _cloudinary.DestroyAsync(deleteParams);
+
             return result;
         }
     }
