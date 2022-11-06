@@ -34,7 +34,7 @@ namespace API.Data
             => await _context.Users.FindAsync(id);
         
 
-        public async Task<AppUser> GetUserByUsernameASync(string username)    
+        public async Task<AppUser> GetUserByUsernameAsync(string username)    
             => await _context.Users
             .Include(p => p.Photos)
             .SingleOrDefaultAsync(x => x.UserName == username);
