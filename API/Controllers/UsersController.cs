@@ -1,6 +1,7 @@
 using API.DTOs;
 using API.Entitites;
 using API.Extensions;
+using API.Helpers;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -21,8 +22,14 @@ namespace API.Controllers
             _userRepository = userRepository;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
-               => Ok(await _userRepository.GetMembersAsync());
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
+        {
+            var users = await _userRepository.GetMembersAsync(userParams);
+
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+
+            return Ok(users);
+        }
 
         // api/users/3 - get user under 3 id
         [HttpGet("{username}", Name = "GetUser")]
