@@ -16,12 +16,13 @@ export class MembersService {
 
   constructor(private http: HttpClient) {}
 
-  getMembers(UserParams: UserParams) {
-    let params = this.getPaginationHeaders(UserParams.pageNumber, UserParams.pageSize);
+  getMembers(userParams: UserParams) {
+    let params = this.getPaginationHeaders(userParams.pageNumber, userParams.pageSize);
 
-    params = params.append('minAge', UserParams.minAge.toString());
-    params = params.append('maxAge', UserParams.maxAge.toString());
-    params = params.append('gender', UserParams.gender);
+    params = params.append('minAge', userParams.minAge.toString());
+    params = params.append('maxAge', userParams.maxAge.toString());
+    params = params.append('gender', userParams.gender);
+    params = params.append('orderBy', userParams.orderBy);
 
     return this.getPaginatedResult<Member[]>(this.baseUrl + 'users', params);
   }
