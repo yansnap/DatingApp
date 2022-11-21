@@ -32,12 +32,12 @@
                   *ngIf="
                     message.dateRead && message.senderUsername !== username
                   "
-                  >(read {{message.dateRead | timeago}})
+                  >(read {{ message.dateRead | timeago }})
                 </span>
               </small>
             </div>
-            <p>{{message.content}}</p>
-            <hr>
+            <p>{{ message.content }}</p>
+            <hr />
           </div>
         </div>
       </li>
@@ -45,13 +45,20 @@
   </div>
 
   <div class="card-footer">
-    <form>
-        <div class="input-group">
-            <input type="text" class="form-control input-sm" placeholder="Send a private message">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="submit">Send</button>
-            </div>
+    <form #messageForm="ngForm" (ngSubmit)="sendMessage()" autocomplete="off">
+      <div class="input-group">
+        <input
+          name="messageContent"
+          required
+          [(ngModel)]="messageContent"
+          type="text"
+          class="form-control input-sm"
+          placeholder="Send a private message"
+        />
+        <div class="input-group-append">
+          <button [disabled]="!messageForm.valid" class="btn btn-primary" type="submit">Send</button>
         </div>
+      </div>
     </form>
   </div>
 </div>
