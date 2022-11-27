@@ -7,7 +7,10 @@
     <ul class="navbar-nav mr-auto">
       <ng-container *ngIf="accountService.currentUser$ | async">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/members" routerLinkActive="active"
+          <a class="nav-link" 
+            routerLink="/members" 
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact:true}"
             >Matches</a
           >
         </li>
@@ -21,7 +24,7 @@
             >Messages</a
           >
         </li>
-        <li class="nav-item">
+        <li *appHasRole="['Admin', 'Moderator']" class="nav-item">
           <a class="nav-link" routerLink="/admin" routerLinkActive="active"
             >Admin</a
           >
@@ -39,7 +42,10 @@
       *ngIf="accountService.currentUser$ | async as user"
       dropdown
     >
-      <img src="{{ user.photoUrl || './assets/user.png'}}" alt="{{ user.username }}" />
+      <img
+        src="{{ user.photoUrl || './assets/user.png' }}"
+        alt="{{ user.username }}"
+      />
       <a
         class="dropdown-toggle text-light ml-2"
         style="text-decoration: none"
