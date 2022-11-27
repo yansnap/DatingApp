@@ -21,6 +21,7 @@ namespace API.Controllers
             _mapper = mapper;
             _userRepository = userRepository;
         }
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
@@ -40,7 +41,7 @@ namespace API.Controllers
             return Ok(users);
         }
 
-        // api/users/3 - get user under 3 id
+        [Authorize(Roles = "Member")]
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
             => await _userRepository.GetMemberAsync(username);
