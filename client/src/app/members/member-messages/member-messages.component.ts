@@ -22,11 +22,8 @@ export class MemberMessagesComponent implements OnInit {
   sendMessage() {
     this.messageService
       .sendMessage(this.username, this.messageContent)
-      .subscribe({
-        next: (message) => {
-          // this.messages.push(message);
-          // this.messageForm.reset();
-        },
+      .then(() => {
+        this.messageForm.reset();
       });
   }
 }

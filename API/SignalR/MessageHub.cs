@@ -32,21 +32,16 @@ namespace API.SignalR
         }
         public override Task OnDisconnectedAsync(Exception exception)
         {
-
             return base.OnDisconnectedAsync(exception);
         }
         public async Task SendMessage(CreateMessageDto createMessageDto)
         {
             var username = Context.User.GetUsername();
-
             if (username == createMessageDto.RecipientUsername.ToLower())
                 throw new HubException("You cannot send messages to yourself");
-
             var sender = await _userRepository.GetUserByUsernameAsync(username);
             var recipient = await _userRepository.GetUserByUsernameAsync(createMessageDto.RecipientUsername);
-
             if (recipient == null) throw new HubException("Not found user");
-
             var message = new Message
             {
                 Sender = sender,
@@ -55,16 +50,12 @@ namespace API.SignalR
                 RecipientUsername = recipient.UserName,
                 Content = createMessageDto.Content
             };
-
             _messageRepository.AddMessage(message);
-
             if (await _messageRepository.SaveAllAsync()) 
             {
                 var group = GetGroupName(sender.UserName, recipient.UserName);
                 await Clients.Group(group).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));
-            }
-            
-
+            }   
         }
         private string GetGroupName(string caller, string other)
         {
