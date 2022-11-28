@@ -35,17 +35,14 @@ namespace API
         {
             app.UseMiddleware<ExceptionMiddleware>();
 
-            // if (env.IsDevelopment())
-            // {
-            //     app.UseDeveloperExceptionPage();
-            //     app.UseSwagger();
-            //     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
-            // }
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("https://localhost:4200"));
+
+            app.UseCors(x => x.AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+                .WithOrigins("https://localhost:4200"));
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -53,7 +50,7 @@ namespace API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<PresenceHub>("hub/presence");
+                endpoints.MapHub<PresenceHub>("hubs/presence");
             });
         }
     }

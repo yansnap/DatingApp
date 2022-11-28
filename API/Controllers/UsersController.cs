@@ -21,7 +21,6 @@ namespace API.Controllers
             _mapper = mapper;
             _userRepository = userRepository;
         }
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
@@ -40,8 +39,6 @@ namespace API.Controllers
 
             return Ok(users);
         }
-
-        [Authorize(Roles = "Member")]
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
             => await _userRepository.GetMemberAsync(username);
@@ -60,7 +57,6 @@ namespace API.Controllers
 
             return BadRequest("Failed to update user");
         }
-
         [HttpPost("add-photo")]
         public async Task<ActionResult<PhotoDto>> AddPhoto([FromForm] IFormFile file)
         {
@@ -89,7 +85,6 @@ namespace API.Controllers
             }
             return BadRequest("Problem addding photo");
         }
-
         [HttpPut("set-main-photo/{photoId}")]
         public async Task<ActionResult> SetMainPhoto(int photoId)
         {
