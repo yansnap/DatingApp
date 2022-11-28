@@ -33,7 +33,6 @@ namespace API.SignalR
             await Clients.All.SendAsync("GetOnlineUsers", currentUsers);
 
             await base.OnDisconnectedAsync(exception);
-
         }
     }
 }
