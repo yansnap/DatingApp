@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { User } from '../_models/user';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',

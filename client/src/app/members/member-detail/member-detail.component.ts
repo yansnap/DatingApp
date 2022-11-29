@@ -7,13 +7,13 @@ import {
 } from '@kolkov/ngx-gallery';
 import { TabDirective, TabsetComponent } from 'ngx-bootstrap/tabs';
 import { take } from 'rxjs/operators';
-import { Member } from 'src/app/_models/member';
-import { Message } from 'src/app/_models/message';
-import { User } from 'src/app/_models/user';
-import { AccountService } from 'src/app/_services/account.service';
-import { MembersService } from 'src/app/_services/members.service';
-import { MessageService } from 'src/app/_services/message.service';
-import { PresenceService } from 'src/app/_services/presence.service';
+import { Member } from 'src/app/models/member';
+import { Message } from 'src/app/models/message';
+import { User } from 'src/app/models/user';
+import { AccountService } from 'src/app/services/account.service';
+import { MembersService } from 'src/app/services/members.service';
+import { MessageService } from 'src/app/services/message.service';
+import { PresenceService } from 'src/app/services/presence.service';
 
 @Component({
   selector: 'app-member-detail',

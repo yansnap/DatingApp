@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { User } from '../_models/user';
-import { AccountService } from '../_services/account.service';
+import { User } from '../models/user';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-nav',
@@ -29,7 +29,10 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {}
   login() {
     this.accountService.login(this.model).subscribe({
-      next: (response) => this.router.navigateByUrl('/members')
+      next: (_) => {
+        this.router.navigateByUrl('/members');
+        this.model = [];
+      },
     });
   }
   logout() {
