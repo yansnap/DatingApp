@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { concat, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Member } from '../_models/member';
-import { PaginatedResult } from '../_models/pagination';
-import { User } from '../_models/user';
-import { UserParams } from '../_models/userParams';
+import { Member } from '../models/member';
+import { PaginatedResult } from '../models/pagination';
+import { User } from '../models/user';
+import { UserParams } from '../models/userParams';
 import { AccountService } from './account.service';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 

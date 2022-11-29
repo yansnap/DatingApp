@@ -4,8 +4,8 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { Member } from '../_models/member';
-import { MembersService } from '../_services/members.service';
+import { Member } from '../models/member';
+import { MembersService } from '../services/members.service';
 
 @Injectable({
   providedIn: 'root',

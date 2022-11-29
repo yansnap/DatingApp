@@ -1,9 +1,9 @@
 import { createViewChild } from '@angular/compiler/src/core';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Message } from 'src/app/_models/message';
-import { MembersService } from 'src/app/_services/members.service';
-import { MessageService } from 'src/app/_services/message.service';
+import { Message } from 'src/app/models/message';
+import { MembersService } from 'src/app/services/members.service';
+import { MessageService } from 'src/app/services/message.service';
 
 @Component({
   selector: 'app-member-messages',

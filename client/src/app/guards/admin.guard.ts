@@ -8,7 +8,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AccountService } from '../_services/account.service';
+import { AccountService } from '../services/account.service';
 
 @Injectable({
   providedIn: 'root',

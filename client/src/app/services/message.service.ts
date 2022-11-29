@@ -4,9 +4,9 @@ import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Group } from '../_models/group';
-import { Message } from '../_models/message';
-import { User } from '../_models/user';
+import { Group } from '../models/group';
+import { Message } from '../models/message';
+import { User } from '../models/user';
 import { getPaginatedResult, getPaginationHeaders } from './paginationHelper';
 
 @Injectable({

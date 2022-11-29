@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { ConfirmService } from 'src/app/_services/confirm.service';
+import { ConfirmService } from 'src/app/services/confirm.service';
 
 @Component({
   selector: 'app-confirm-dialog',
