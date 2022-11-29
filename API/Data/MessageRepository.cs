@@ -12,11 +12,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class MessageRepositroy : IMessageRepository
+    public class MessageRepository : IMessageRepository
     {
         private readonly DataContext _context;
         private readonly IMapper _mapper;
-        public MessageRepositroy(DataContext context, IMapper mapper)
+        public MessageRepository(DataContext context, IMapper mapper)
         {
             _mapper = mapper;
             _context = context;
@@ -105,7 +105,7 @@ namespace API.Data
                     message.DateRead = DateTime.Now;
                 }
 
-                await _context.SaveChangesAsync();
+                
             }
 
             return _mapper.Map<IEnumerable<MessageDto>>(messages);
