@@ -1,4 +1,4 @@
-# fly.toml file generated for yan-datingapp on 2022-11-30T03:37:31+02:00
+# fly.toml file generated for yan-datingapp on 2022-11-30T05:13:10+02:00
 
 app = "yan-datingapp"
 kill_signal = "SIGINT"
@@ -12,7 +12,6 @@ processes = []
   ASPNETCORE_URLS="http://+:8080"
   CloudinarySettings__CloudName="dauuizeox"
   CloudinarySettings__ApiKey="899958725399586"
-
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
