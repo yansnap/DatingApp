@@ -8,14 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// add services to the container
+// Add services to the container.
 
-builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddControllers();
-builder.Services.AddCors();
+builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
-builder.Services.AddSignalR();
-
 
 var connString = "";
 if (builder.Environment.IsDevelopment())
@@ -24,6 +21,7 @@ else
 {
     // Use connection string provided at runtime by FlyIO.
     var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+
     // Parse connection URL to connection string for Npgsql
     connUrl = connUrl.Replace("postgres://", string.Empty);
     var pgUserPass = connUrl.Split("@")[0];
@@ -42,15 +40,13 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseNpgsql(connString);
 });
 
-// Configure the HTTP request pipeline
-
 var app = builder.Build();
 
+// Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseHttpsRedirection();
-
-app.UseCors(x => x.AllowAnyHeader()
+app.UseCors(builder => builder
+    .AllowAnyHeader()
     .AllowAnyMethod()
     .AllowCredentials()
     .WithOrigins("https://localhost:4200"));
@@ -66,7 +62,6 @@ app.MapHub<PresenceHub>("hubs/presence");
 app.MapHub<MessageHub>("hubs/message");
 app.MapFallbackToController("Index", "Fallback");
 
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 try
@@ -75,12 +70,13 @@ try
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
     await context.Database.MigrateAsync();
+    await Seed.ClearConnections(context);
     await Seed.SeedUsers(userManager, roleManager);
 }
 catch (Exception ex)
 {
-    var logger = services.GetRequiredService<ILogger<Program>>();
+    var logger = services.GetService<ILogger<Program>>();
     logger.LogError(ex, "An error occurred during migration");
 }
 
-await app.RunAsync();
+app.Run();
